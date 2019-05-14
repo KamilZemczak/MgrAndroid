@@ -32,11 +32,10 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="50dp"
         android:background="@color/white"
-        android:drawableLeft="@drawable/ic_person"
+        android:drawableLeft="@drawable/ic_person2"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Nazwa użytkownika"
-
         android:inputType="textPersonName" />
 
     <EditText
@@ -52,7 +51,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@color/white"
-        android:drawableLeft="@drawable/ic_lock"
+        android:drawableLeft="@drawable/ic_lock2"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Hasło"
@@ -71,7 +70,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@color/white"
-        android:drawableLeft="@drawable/ic_lock"
+        android:drawableLeft="@drawable/ic_lock2"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Powtórz hasło"
@@ -85,7 +84,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:background="@color/white"
-        android:drawableLeft="@drawable/ic_person"
+        android:drawableLeft="@drawable/ic_person2"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Imię"
@@ -97,7 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/registerActivity_etPasswordConfirm"
         android:background="@color/white"
-        android:drawableLeft="@drawable/ic_person"
+        android:drawableLeft="@drawable/ic_person2"
         android:layout_marginLeft="29dp"
         android:layout_toRightOf="@+id/registerActivity_etName"
         android:drawablePadding="5dp"
@@ -105,37 +104,47 @@
         android:hint="Nazwisko"
         android:inputType="textCapWords|textPersonName" />
 
-
     <TextView
-        android:id="@+id/registerActivity_tvDate"
+        android:id="@+id/registerActivity_tvDateOfBirth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="22dp"
         android:textColor="@color/white"
         android:layout_below="@+id/registerActivity_etSurname"
         android:textStyle="bold"
-        android:text="DATA URODZENIA" />
+        android:textSize="17dp"
+        android:text="Data urodzenia" />
 
     <EditText
-        android:id="@+id/registerActivity_etDate"
+        android:id="@+id/registerActivity_etDateOfBirth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/registerActivity_tvDate"
-        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/registerActivity_tvDateOfBirth"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:background="@color/white"
-        android:drawableLeft="@drawable/ic_lock"
+        android:hint=" dd.mm.rrrr"
+        android:drawableLeft="@drawable/ic_calendar2"
         android:ems="10"
         android:inputType="date" />
 
-
+    <TextView
+        android:id="@+id/registerActivity_tvGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="22dp"
+        android:textColor="@color/white"
+        android:layout_below="@+id/registerActivity_etDateOfBirth"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:text="Płeć" />
 
     <RadioGroup
         android:id="@+id/registerActivity_rgGender"
@@ -145,8 +154,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/registerActivity_etDate"
-        android:layout_marginTop="19dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/registerActivity_tvGender"
         android:drawableLeft="@drawable/ic_lock"
         android:drawablePadding="5dp"
         android:orientation="horizontal">
@@ -156,6 +165,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.14"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:onClick="radioButtonClick"
             android:text="MĘŻCZYZNA" />
 
@@ -164,6 +175,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.06"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             android:onClick="radioButtonClick"
             android:text="KOBIETA" />
     </RadioGroup>
@@ -180,7 +193,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="28dp"
         android:backgroundTint="#8091ee"
-        android:onClick="login"
+        android:onClick="register"
         android:text="Zarejestruj się" />
 
     <TextView

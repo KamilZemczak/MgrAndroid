@@ -5,6 +5,7 @@
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/refa4"
     tools:context=".activity.LoginActivity">
 
     <ImageView
@@ -14,6 +15,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="40px"
+        android:visibility="invisible"
         android:src="@drawable/logo2" />
 
     <TextView
@@ -24,6 +26,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/loginActivity_logo"
         android:text="Witaj w serwisie społecznościowym poświęconym biegaczom."
+        android:visibility="invisible"
         android:gravity="center_horizontal" />
 
     <TextView
@@ -34,15 +37,17 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/loginActivity_etText1"
         android:gravity="center_horizontal"
+        android:visibility="invisible"
         android:text="Dostęp do strony dopiero po zalogowaniu." />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="2dp"
         android:layout_above="@+id/loginActivity_tvRegisterInfo"
         android:layout_below="@+id/loginActivity_etText2"
         android:layout_marginTop="20px"
+        android:visibility="invisible"
         android:src="@drawable/refactor" />
 
     <EditText
@@ -58,7 +63,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:drawableLeft="@drawable/ic_person"
+        android:drawableLeft="@drawable/ic_person2"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Nazwa użytkownika"
@@ -78,7 +83,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:drawableLeft="@drawable/ic_lock"
+        android:drawableLeft="@drawable/ic_lock2"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Hasło"
@@ -89,12 +94,11 @@
         android:id="@+id/loginActivity_bLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView3"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_below="@+id/loginActivity_etPassword"
         android:backgroundTint="#8091ee"
         android:onClick="login"
         android:text="Zaloguj się" />
@@ -105,8 +109,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_below="@+id/loginActivity_bLogin"
         android:layout_marginBottom="28dp"
         android:onClick="openRegister"
+        android:layout_marginTop="35dp"
         android:text="Jeśli nie masz konta: ZAREJESTRUJ SIĘ" />
 
 </RelativeLayout>

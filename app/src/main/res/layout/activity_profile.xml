@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/refa6"
+    tools:context="com.example.kamilzemczak.mgrandroid.activity.ProfileActivity">
+
+    <TextView
+        android:id="@+id/profileActivity_tvInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:layout_marginTop="4dp"
+        android:text="EDYCJA PROFILU:"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/profileActivity_tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="17dp"
+        android:layout_below="@+id/profileActivity_tvInfo"
+        android:text="Nazwa użytkownika" />
+
+    <EditText
+        android:id="@+id/profileActivity_etUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/profileActivity_tvUsername"
+        android:layout_marginBottom="18dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_person2"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Nazwa użytkownika"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/profileActivity_tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="17dp"
+        android:layout_below="@+id/profileActivity_etUsername"
+        android:text="Imię" />
+
+    <EditText
+        android:id="@+id/profileActivity_etName"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileActivity_tvName"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_person2"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Imię"
+        android:inputType="textCapWords|textPersonName" />
+
+
+    <TextView
+        android:id="@+id/profileActivity_tvSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginLeft="220dp"
+        android:layout_marginRight="20dp"
+        android:textSize="17dp"
+        android:layout_below="@+id/profileActivity_etUsername"
+        android:text="Nazwisko" />
+
+    <EditText
+        android:id="@+id/profileActivity_etSurname"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileActivity_tvName"
+        android:background="@color/white"
+        android:drawableLeft="@drawable/ic_person2"
+        android:layout_marginLeft="29dp"
+        android:layout_toRightOf="@+id/profileActivity_etName"
+        android:drawablePadding="5dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Nazwisko"
+        android:inputType="textCapWords|textPersonName" />
+
+    <TextView
+        android:id="@+id/profileActivity_tvDateOfBirth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="22dp"
+        android:textColor="@color/white"
+        android:layout_below="@+id/profileActivity_etSurname"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:text="Data urodzenia" />
+
+    <EditText
+        android:id="@+id/profileActivity_etDateOfBirth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/profileActivity_tvDateOfBirth"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:hint=" dd.mm.rrrr"
+        android:drawableLeft="@drawable/ic_calendar2"
+        android:ems="10"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/profileActivity_tvGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="22dp"
+        android:textColor="@color/white"
+        android:layout_below="@+id/profileActivity_etDateOfBirth"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:text="Płeć" />
+
+    <RadioGroup
+        android:id="@+id/profileActivity_rgGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/profileActivity_tvGender"
+        android:drawableLeft="@drawable/ic_lock"
+        android:drawablePadding="5dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/profileActivity_rbMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.14"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:onClick="radioButtonClick"
+            android:text="MĘŻCZYZNA" />
+
+        <RadioButton
+            android:id="@+id/profileActivity_rbFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.06"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:onClick="radioButtonClick"
+            android:text="KOBIETA" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/profileActivity_tvWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="22dp"
+        android:textColor="@color/white"
+        android:layout_below="@+id/profileActivity_rgGender"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:text="Waga" />
+
+    <EditText
+        android:id="@+id/profileActivity_etWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/profileActivity_tvWeight"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:hint="Waga [kg]"
+        android:drawableLeft="@drawable/ic_fitness"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/profileActivity_tvHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="22dp"
+        android:textColor="@color/white"
+        android:layout_below="@+id/profileActivity_etWeight"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:text="Wzrost" />
+
+    <EditText
+        android:id="@+id/profileActivity_etHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/profileActivity_tvHeight"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:hint="Wzrost [cm]"
+        android:drawableLeft="@drawable/ic_accessibility"
+        android:ems="10"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/profileActivity_tvFavourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="22dp"
+        android:textColor="@color/white"
+        android:layout_below="@+id/profileActivity_etHeight"
+        android:textStyle="bold"
+        android:textSize="17dp"
+        android:text="Ulubiona dyscyplina" />
+
+    <EditText
+        android:id="@+id/profileActivity_etFavourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/profileActivity_tvFavourite"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:drawableRight="@drawable/ic_line2"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:hint=" Wybierz ulubioną dyscyplinę"
+        android:focusableInTouchMode="false"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/profileActivity_bEditProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profileActivity_etFavourite"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#8091ee"
+        android:onClick="login"
+        android:text="Zapisz zmiany" />
+
+</RelativeLayout>
