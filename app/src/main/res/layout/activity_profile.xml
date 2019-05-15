@@ -295,7 +295,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:backgroundTint="#8091ee"
-        android:onClick="login"
+        android:onClick="updateUser"
         android:text="Zapisz zmiany" />
 
 </RelativeLayout>

@@ -1,12 +1,13 @@
 package com.example.kamilzemczak.mgrandroid.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.view.View;
 
 import com.example.kamilzemczak.mgrandroid.R;
 import com.example.kamilzemczak.mgrandroid.backgroundworker.LoginBackgroundWorker;
@@ -23,20 +24,19 @@ import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
 
-    MySingleton singleton =  MySingleton.getInstance();
+    MySingleton singleton = MySingleton.getInstance();
 
     private EditText username, password;
     private Button loginButton;
 
-    public static String userCurrentName, userCurrentSurname, userCurrentUsername, userCurrentGender, userCurrentFavourite;
     public static Date userCurrentDateOfBirth;
     public static Integer userCurrentId, userCurrentWeight, userCurrentHeight;
+    public static String userCurrentName, userCurrentSurname, userCurrentUsername, userCurrentGender, userCurrentFavourite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         username = (EditText) findViewById(R.id.loginActivity_etName);
         password = (EditText) findViewById(R.id.loginActivity_etPassword);
         loginButton = (Button) findViewById(R.id.loginActivity_bLogin);
@@ -60,15 +60,15 @@ public class LoginActivity extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        if (result.equals("Wrong.")) {
+        if (result.startsWith("<!DOCTYPE")) {
+            getUserDetails();
+            loginSuccess();
+            startActivity(new Intent(this, WelcomeActivity.class));
+        } else {
             loginFailed();
             this.username.setError("Niewłaściwy login lub hasło.");
             this.password.setError("Niewłaściwy login lub hasło.");
             return;
-        } else if (result.startsWith("<!DOCTYPE")) {
-            getUserDetails();
-            loginSuccess();
-            startActivity(new Intent(this, WelcomeActivity.class));
         }
     }
 
@@ -95,6 +95,42 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public boolean validate() {
+        boolean valid = true;
+        String username = this.username.getText().toString();
+        String password = this.password.getText().toString();
+
+        if (username.isEmpty()) {
+            this.username.setError("Nie wpisano nazwy użytkownika.");
+            valid = false;
+        } else {
+            this.username.setError(null);
+        }
+
+        if (password.isEmpty()) {
+            this.password.setError("Nie wpisano hasła.");
+            valid = false;
+        } else {
+            this.password.setError(null);
+        }
+        return valid;
+    }
+
+    public void loginFailed() {
+        Toast.makeText(getBaseContext(), "Logowanie nieudane.", Toast.LENGTH_LONG).show();
+        loginButton.setEnabled(true);
+    }
+
+    public void loginSuccess() {
+        Toast.makeText(getBaseContext(), "Logowanie udane.", Toast.LENGTH_LONG).show();
+        loginButton.setEnabled(true);
+    }
+
+    public void openRegister(View view) {
+        startActivity(new Intent(this, RegisterActivity.class));
+    }
+
+
     private void prepareUserData(User currentUser) {
         userCurrentId = currentUser.getId();
         userCurrentName = currentUser.getName();
@@ -116,43 +152,5 @@ public class LoginActivity extends AppCompatActivity {
         if (currentUser.getFavourite() != null) {
             userCurrentFavourite = currentUser.getFavourite();
         }
-    }
-
-    public boolean validate() {
-        boolean valid = true;
-
-        String username = this.username.getText().toString();
-        String password = this.password.getText().toString();
-
-        if (username.isEmpty()) {
-            this.username.setError("Nie wpisano nazwy użytkownika.");
-            valid = false;
-        } else {
-            this.username.setError(null);
-        }
-
-        if (password.isEmpty()) {
-            this.password.setError("Nie wpisano hasła.");
-            valid = false;
-        } else {
-            this.password.setError(null);
-        }
-
-        return valid;
-    }
-
-    public void loginFailed() {
-        Toast.makeText(getBaseContext(), "Logowanie nieudane.", Toast.LENGTH_LONG).show();
-        loginButton.setEnabled(true);
-    }
-
-    public void loginSuccess() {
-        Toast.makeText(getBaseContext(), "Logowanie udane.", Toast.LENGTH_LONG).show();
-        loginButton.setEnabled(true);
-    }
-
-
-    public void openRegister(View view) {
-        startActivity(new Intent(this, RegisterActivity.class));
     }
 }

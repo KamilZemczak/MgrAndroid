@@ -12,22 +12,58 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginLeft="74dp"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:gravity="center_horizontal"
-        android:layout_marginLeft="74dp"
         android:text="Pokaz zdjęć użytkowników" />
 
     <com.smarteist.autoimageslider.SliderLayout
+        android:id="@+id/imageSlider"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="65dp"
-        android:layout_below="@+id/welcomeActivity_tvInfo"
-        android:id="@+id/imageSlider"/>
+        android:layout_below="@+id/welcomeActivity_tvInfo" />
 
+    <TextView
+        android:id="@+id/welcomeActivity_tvInfo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="163dp"
+        android:layout_marginLeft="195dp"
+        android:layout_below="@+id/imageSlider"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:text="" />
 
+    <Button
+        android:id="@+id/welcomeActivity_bProfile"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="Button"
+        android:onClick="openProfile" />
 
+    <Button
+        android:id="@+id/welcomeActivity_bPhoto"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignTop="@+id/welcomeActivity_bProfile"
+        android:layout_toEndOf="@+id/welcomeActivity_bProfile"
+        android:visibility="invisible"
+        android:text="Button"
+        android:onClick="openPhoto" />
+
+    <Button
+        android:id="@+id/welcomeActivity_bLogout"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"
+        android:onClick="logout" />
 
 </RelativeLayout>

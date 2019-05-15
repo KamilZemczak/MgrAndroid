@@ -47,7 +47,7 @@ public class MySingleton {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date date) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -55,7 +55,7 @@ public class MySingleton {
         return favourite;
     }
 
-    public void setFavourite(String about) {
+    public void setFavourite(String favourite) {
         this.favourite = favourite;
     }
 }

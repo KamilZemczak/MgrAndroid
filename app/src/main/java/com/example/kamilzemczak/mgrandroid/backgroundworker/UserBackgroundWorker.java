@@ -67,7 +67,7 @@ public class UserBackgroundWorker extends AsyncTask<String, Void, String> {
                 String username = params[2];
                 String name = params[3];
                 String surname = params[4];
-                String dateOfBirth = params[5];
+                String stringDate = params[5];
                 String gender = params[6];
                 String weight = params[7];
                 String height = params[8];
@@ -83,7 +83,7 @@ public class UserBackgroundWorker extends AsyncTask<String, Void, String> {
                         + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8") + "&"
                         + URLEncoder.encode("name", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8") + "&"
                         + URLEncoder.encode("surname", "UTF-8") + "=" + URLEncoder.encode(surname, "UTF-8") + "&"
-                        + URLEncoder.encode("dateOfBirth", "UTF-8") + "=" + URLEncoder.encode(dateOfBirth, "UTF-8") + "&"
+                        + URLEncoder.encode("stringDate", "UTF-8") + "=" + URLEncoder.encode(stringDate, "UTF-8") + "&"
                         + URLEncoder.encode("gender", "UTF-8") + "=" + URLEncoder.encode(gender, "UTF-8") + "&"
                         + URLEncoder.encode("weight", "UTF-8") + "=" + URLEncoder.encode(weight, "UTF-8") + "&"
                         + URLEncoder.encode("height", "UTF-8") + "=" + URLEncoder.encode(height, "UTF-8") + "&"

@@ -1,19 +1,15 @@
 package com.example.kamilzemczak.mgrandroid.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,20 +23,24 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutionException;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    MySingleton singleton = MySingleton.getInstance();
+
     private LoginActivity loginActivity;
 
-    MySingleton singleton =  MySingleton.getInstance();
-
     private EditText username, name, surname, dateOfBirth, gender, weight, height, favourite;
-
     private Button updateButton;
+    private RadioButton genderRadioButton, rbMale, rbFemale;
+    private RadioGroup genderRadioGroup;
 
-    private String currentUsername = loginActivity.userCurrentUsername;
     private Integer userCurrentId = loginActivity.userCurrentId;
+    private String currentUsername = loginActivity.userCurrentUsername;
+    private String genderOptionTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +50,13 @@ public class ProfileActivity extends AppCompatActivity {
         name = (EditText) findViewById(R.id.profileActivity_etName);
         surname = (EditText) findViewById(R.id.profileActivity_etSurname);
         dateOfBirth = (EditText) findViewById(R.id.profileActivity_etDateOfBirth);
-        //gender
+        genderRadioGroup = (RadioGroup) findViewById(R.id.profileActivity_rgGender);
         weight = (EditText) findViewById(R.id.profileActivity_etWeight);
         height = (EditText) findViewById(R.id.profileActivity_etHeight);
         favourite = (EditText) findViewById(R.id.profileActivity_etFavourite);
         updateButton = (Button) findViewById(R.id.profileActivity_bEditProfile);
-
+        rbMale = (RadioButton) findViewById(R.id.profileActivity_rbMale);
+        rbFemale = (RadioButton) findViewById(R.id.profileActivity_rbFemale);
         setCurrentUserDetails();
         favourite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,37 +67,14 @@ public class ProfileActivity extends AppCompatActivity {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(ProfileActivity.this, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileActivity.this, "Wybrano " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        favourite.setText(" " + item.getTitle());
                         return true;
                     }
                 });
-
                 popupMenu.show();
             }
         });
-    }
-
-    private void setCurrentUserDetails() {
-        username.setText(loginActivity.userCurrentUsername, TextView.BufferType.EDITABLE);
-        name.setText(loginActivity.userCurrentName, TextView.BufferType.EDITABLE);
-        surname.setText(loginActivity.userCurrentSurname, TextView.BufferType.EDITABLE);
-        //dateOfBirth.setText(loginActivity.userCurrentDateOfBirth, TextView.BufferType.EDITABLE);
-
-        if (loginActivity.userCurrentGender != null && loginActivity.userCurrentGender.equals("M")) {
-            gender.setText("Mężczyzna", TextView.BufferType.EDITABLE);
-        }
-        if (loginActivity.userCurrentGender != null && loginActivity.userCurrentGender.equals("F")) {
-            gender.setText("Kobieta", TextView.BufferType.EDITABLE);
-        }
-        if ((singleton.getWeight()) != null) {
-            weight.setText(Integer.toString(singleton.getWeight()), TextView.BufferType.EDITABLE);
-        }
-        if ((singleton.getHeight()) != null) {
-            height.setText(Integer.toString(singleton.getHeight()), TextView.BufferType.EDITABLE);
-        }
-        if (singleton.getFavourite() != null) {
-            favourite.setText(singleton.getFavourite(), TextView.BufferType.EDITABLE);
-        }
     }
 
     public void updateUser(View view) {
@@ -109,16 +87,35 @@ public class ProfileActivity extends AppCompatActivity {
         String username = this.username.getText().toString();
         String name = this.name.getText().toString();
         String surname = this.surname.getText().toString();
-        String dateOfBirth = this.dateOfBirth.getText().toString();
-        //String gender = this.gende
+        String stringDate = this.dateOfBirth.getText().toString();
+        if (genderOptionTwo == null) {
+            if (rbMale.isChecked()) {
+                genderOptionTwo = "male";
+            } else {
+                genderOptionTwo = "female";
+            }
+        }
         String weight = this.weight.getText().toString();
         String height = this.height.getText().toString();
         String favourite = this.favourite.getText().toString();
         UserBackgroundWorker userBackgroundWorker = new UserBackgroundWorker(this);
-        //userBackgroundWorker.execute(type, id, username, name, surname, dateOfBirth, gender, weight, height, favourite);
+        userBackgroundWorker.execute(type, id, username, name, surname, stringDate, genderOptionTwo, weight, height, favourite);
         updateProfileSuccess();
         getUserDetails();
         showProfile(view);
+    }
+
+    public void radioButtonClick(View view) {
+        int radioButtonId = genderRadioGroup.getCheckedRadioButtonId();
+        genderRadioButton = (RadioButton) findViewById(radioButtonId);
+        String genderCheck = genderRadioButton.getText().toString();
+        if (genderCheck.equals("MĘŻCZYZNA") && genderCheck != null) {
+            genderOptionTwo = "male";
+        } else if (genderCheck.equals("KOBIETA") && genderCheck != null) {
+            genderOptionTwo = "female";
+        } else {
+            return;
+        }
     }
 
     public void getUserDetails() {
@@ -144,27 +141,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void setCurrentUserValues(User currentUser) {
-        loginActivity.userCurrentId = currentUser.getId();
-        loginActivity.userCurrentUsername = currentUser.getUsername();
-        loginActivity.userCurrentName = currentUser.getName();
-        loginActivity.userCurrentSurname = currentUser.getSurname();
-        loginActivity.userCurrentDateOfBirth = currentUser.getDateOfBirth();
-        loginActivity.userCurrentGender = currentUser.getGender();
-        if (singleton.getWeight() != null) {
-            singleton.setWeight(currentUser.getWeight());
-            loginActivity.userCurrentWeight = currentUser.getWeight();
-        }
-        if (singleton.getHeight() != null) {
-            singleton.setHeight(currentUser.getHeight());
-            loginActivity.userCurrentHeight = currentUser.getHeight();
-        }
-        if (singleton.getFavourite() != null) {
-            singleton.setFavourite(currentUser.getFavourite());
-            loginActivity.userCurrentFavourite = currentUser.getFavourite();
-        }
-    }
-
     public boolean validate() {
         boolean valid = true;
 
@@ -173,12 +149,8 @@ public class ProfileActivity extends AppCompatActivity {
         String surname = this.surname.getText().toString();
         String weight = null;
         String height = null;
-        String city = null;
-        String about = null;
-        Integer iAge = null;
         Integer iWeight = null;
         Integer iHeight = null;
-        Integer iAbout = null;
 
         if (this.weight.getText() != null) {
             weight = this.weight.getText().toString();
@@ -200,6 +172,78 @@ public class ProfileActivity extends AppCompatActivity {
         valid = validWeight(valid, weight, iWeight);
         valid = validHeight(valid, height, iHeight);
         return valid;
+    }
+
+    public void updateProfileFailed() {
+        Toast.makeText(getBaseContext(), "Zaktualizowanie profilu nieudane.", Toast.LENGTH_LONG).show();
+        updateButton.setEnabled(true);
+    }
+
+    public void updateProfileSuccess() {
+        Toast.makeText(getBaseContext(), "Zaktualizowanie profilu udane.", Toast.LENGTH_LONG).show();
+        updateButton.setEnabled(true);
+    }
+
+    public void showProfile(View view) {
+        startActivity(new Intent(this, WelcomeActivity.class));
+    }
+
+    public void logout(MenuItem menu) {
+        startActivity(new Intent(this, LoginActivity.class));
+        Toast.makeText(getBaseContext(), "Wylogowanie powiodło się!", Toast.LENGTH_LONG).show();
+    }
+
+    private void setCurrentUserDetails() {
+        Format formatter = new SimpleDateFormat("dd-MM-yyyy");
+        String stringDateOfBirth = formatter.format(loginActivity.userCurrentDateOfBirth);
+        username.setText(loginActivity.userCurrentUsername, TextView.BufferType.EDITABLE);
+        name.setText(loginActivity.userCurrentName, TextView.BufferType.EDITABLE);
+        surname.setText(loginActivity.userCurrentSurname, TextView.BufferType.EDITABLE);
+        dateOfBirth.setText(stringDateOfBirth, TextView.BufferType.EDITABLE);
+
+        if (loginActivity.userCurrentGender.equals("male")) {
+            rbMale.setChecked(true);
+
+        } else {
+            rbFemale.setChecked(true);
+        }
+
+        if (loginActivity.userCurrentGender != null && loginActivity.userCurrentGender.equals("M")) {
+            gender.setText("Mężczyzna", TextView.BufferType.EDITABLE);
+        }
+        if (loginActivity.userCurrentGender != null && loginActivity.userCurrentGender.equals("F")) {
+            gender.setText("Kobieta", TextView.BufferType.EDITABLE);
+        }
+        if ((singleton.getWeight()) != null) {
+            weight.setText(Integer.toString(singleton.getWeight()), TextView.BufferType.EDITABLE);
+        }
+        if ((singleton.getHeight()) != null) {
+            height.setText(Integer.toString(singleton.getHeight()), TextView.BufferType.EDITABLE);
+        }
+        if (singleton.getFavourite() != null) {
+            favourite.setText(singleton.getFavourite(), TextView.BufferType.EDITABLE);
+        }
+    }
+
+    private void setCurrentUserValues(User currentUser) {
+        loginActivity.userCurrentId = currentUser.getId();
+        loginActivity.userCurrentUsername = currentUser.getUsername();
+        loginActivity.userCurrentName = currentUser.getName();
+        loginActivity.userCurrentSurname = currentUser.getSurname();
+        loginActivity.userCurrentDateOfBirth = currentUser.getDateOfBirth();
+        loginActivity.userCurrentGender = currentUser.getGender();
+        if (singleton.getWeight() != null) {
+            singleton.setWeight(currentUser.getWeight());
+            loginActivity.userCurrentWeight = currentUser.getWeight();
+        }
+        if (singleton.getHeight() != null) {
+            singleton.setHeight(currentUser.getHeight());
+            loginActivity.userCurrentHeight = currentUser.getHeight();
+        }
+        if (singleton.getFavourite() != null) {
+            singleton.setFavourite(currentUser.getFavourite());
+            loginActivity.userCurrentFavourite = currentUser.getFavourite();
+        }
     }
 
     private boolean validHeight(boolean valid, String height, Integer iHeight) {
@@ -267,26 +311,5 @@ public class ProfileActivity extends AppCompatActivity {
             result = true;
         }
         return result;
-    }
-
-
-    public void updateProfileFailed() {
-        Toast.makeText(getBaseContext(), "Zaktualizowanie profilu nieudane.", Toast.LENGTH_LONG).show();
-        updateButton.setEnabled(true);
-    }
-
-    public void updateProfileSuccess() {
-        Toast.makeText(getBaseContext(), "Zaktualizowanie profilu udane.", Toast.LENGTH_LONG).show();
-        updateButton.setEnabled(true);
-    }
-
-    public void showProfile(View view) {
-        startActivity(new Intent(this, ProfileActivity.class));
-    }
-
-
-    public void logout(MenuItem menu) {
-        startActivity(new Intent(this, LoginActivity.class));
-        Toast.makeText(getBaseContext(), "Wylogowanie powiodło się!", Toast.LENGTH_LONG).show();
     }
 }
